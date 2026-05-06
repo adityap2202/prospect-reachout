@@ -1,0 +1,8 @@
+[variables]
+# Force Node 20 so better-sqlite3 can use prebuilt binaries.
+NIXPACKS_NODE_VERSION = "20"
+
+[phases.setup]
+# Safety net if compilation is ever needed.
+nixPkgs = ["python3", "gcc", "gnumake"]
+

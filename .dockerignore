@@ -1,0 +1,12 @@
+node_modules
+client/node_modules
+client/dist
+dist
+
+.git
+.env
+data
+*.sqlite
+
+*.log
+

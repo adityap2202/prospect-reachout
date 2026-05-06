@@ -1,0 +1,34 @@
+{
+  "name": "donor-reachout",
+  "private": true,
+  "version": "0.1.0",
+  "description": "GivingPi Donor Prospecting Tool (Spec v2)",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -n server,client -c cyan,magenta \"nodemon --config nodemon.json server/server.js\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "node server/server.js",
+    "lint": "npm run lint --prefix client"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0",
+    "better-sqlite3": "^11.7.0",
+    "cheerio": "^1.1.2",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^3.3.2",
+    "pino": "^9.9.0",
+    "pino-http": "^10.5.0",
+    "rss-parser": "^3.13.0",
+    "tavily": "^2.0.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.10"
+  }
+}
+

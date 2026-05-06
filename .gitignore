@@ -1,0 +1,21 @@
+node_modules/
+client/node_modules/
+
+# env/secrets
+.env
+.env.*.local
+
+# local data
+data/
+*.sqlite
+
+# builds
+client/dist/
+dist/
+
+# logs
+*.log
+
+# OS
+.DS_Store
+

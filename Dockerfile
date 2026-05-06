@@ -18,9 +18,10 @@ COPY . .
 RUN npm run build
 
 ENV NODE_ENV=production
-ENV PORT=3001
 ENV DATA_DIR=/app/data
 
+# Railway injects PORT at runtime; do not hardcode it here.
+# EXPOSE is informational only, but keep 3001 as local default.
 EXPOSE 3001
 
 CMD ["npm", "start"]

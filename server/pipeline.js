@@ -225,7 +225,7 @@ The message must sound like a thoughtful human who actually listened to the epis
 Style constraints:
 - Write in the tone of Michael Lewis: concrete, curious, sharp.
 - Short sentences. Free prose.
-- No em dash characters (— or –). Use commas or periods instead.
+- Absolutely no em dash characters (— or –). Use commas or periods instead.
 Hard rules:
 - Under 150 words
 - First sentence must reference something specific the person said or did — not a compliment
@@ -234,6 +234,7 @@ Hard rules:
 - Do not mention "philanthropy" in the first sentence
 - Mirror 1-2 words from their vocabulary naturally
 - The IIMB connection must feel earned and specific, not bolted on
+- Absolutely no em dash characters (— or –). Use commas or periods instead.
 - Close with a low-friction ask: a conversation, not a meeting request`;
 
   const prompt = `Insights about this person:
@@ -244,8 +245,20 @@ ${iimbContext}
 
 Draft the LinkedIn message. Return only the message text. Nothing else.`;
 
-  const raw = await anthropicJson({ system, prompt, maxTokens: 512 });
-  return raw.trim();
+  const raw1 = (await anthropicJson({ system, prompt, maxTokens: 512 })).trim();
+
+  // Prompt-only nudge (no post-processing). If the model slips on style, ask once to rewrite.
+  if (!/[—–]/.test(raw1)) return raw1;
+
+  const raw2 = (await anthropicJson({
+    system,
+    prompt:
+      prompt +
+      "\n\nRewrite in the same meaning. No em dashes (— or –). Short sentences. Free prose. Return only message text.",
+    maxTokens: 512
+  })).trim();
+
+  return raw2;
 }
 
 const { addPipelineEvent } = require("./pipelineEvents");
